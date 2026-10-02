@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title> A little something for you🌷</title>
+
+
+<style>
+
+/* =====================================================
+   BASIC SETUP
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+
+    overflow: hidden;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    background: #d49bb8;
+}
+
+
+/* =====================================================
+   MAIN SUNSET BACKGROUND
+===================================================== */
+
+.sky {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 180, 180, 0.10),
+            rgba(255, 190, 150, 0.10)
+        ),
+        url("sky.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    z-index: 0;
+
+}
+
+
+/* =====================================================
+   SOFT WARM LIGHT OVER THE SKY
+===================================================== */
+
+.sky::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255, 214, 155, 0.16),
+            transparent 42%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   DARK SOFT EDGE
+   Makes the pictures easier to see
+===================================================== */
+
+.vignette {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 42%,
+            rgba(35, 20, 55, 0.20) 100%
+        );
+
+    z-index: 1;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   SMALL SPARKLES
+===================================================== */
+
+.sparkle {
+
+    position: fixed;
+
+    z-index: 4;
+
+    color: rgba(255,255,255,0.9);
+
+    font-size: 18px;
+
+    pointer-events: none;
+
+    animation:
+        sparkleFloat
+        5s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes sparkleFloat {
+
+    0% {
+        transform:
+            translateY(20px)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-30px)
+            scale(1.2);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================================================
+   FLOATING FLOWER PETALS
+   ONLY THE BEAUTIFUL FLOWER PART
+   NO STEMS
+===================================================== */
+
+.floating-flower {
+
+    position: fixed;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    width: 30px;
+
+    height: 30px;
+
+    animation:
+        flyAround
+        var(--duration)
+        linear
+        infinite;
+
+    animation-delay:
+        var(--delay);
+
+}
+
+
+/* individual flower */
+
+.flower-shape {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    transform:
+        rotate(var(--rotation));
+
+}
+
+
+/* petals */
+
+.petal {
+
+    position: absolute;
+
+    width: 14px;
+
+    height: 22px;
+
+    border-radius:
+        70%
+        70%
+        55%
+        55%;
+
+    left: 8px;
+
+    top: 4px;
+
+    transform-origin:
+        50%
+        90%;
+
+}
+
+
+/* five petal positions */
+
+.petal:nth-child(1) {
+
+    transform:
+        rotate(0deg)
+        translateY(-6px);
+
+}
+
+.petal:nth-child(2) {
+
+    transform:
+        rotate(72deg)
+        translateY(-6px);
+
+}
+
+.petal:nth-child(3) {
+
+    transform:
+        rotate(144deg)
+        translateY(-6px);
+
+}
+
+.petal:nth-child(4) {
+
+    transform:
+        rotate(216deg)
+        translateY(-6px);
+
+}
+
+.petal:nth-child(5) {
+
+    transform:
+        rotate(288deg)
+        translateY(-6px);
+
+}
+
+
+/* colourful flower sets */
+
+.pink .petal {
+    background: #f59ab8;
+}
+
+.red .petal {
+    background: #ed6470;
+}
+
+.yellow .petal {
+    background: #ffd76a;
+}
+
+.blue .petal {
+    background: #91bce9;
+}
+
+.white .petal {
+    background: #fff7ee;
+}
+
+.purple .petal {
+    background: #cba4df;
+}
+
+
+/* flower center */
+
+.flower-center {
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #fff0a8;
+
+    left: 11px;
+    top: 11px;
+
+}
+
+
+/* =====================================================
+   FLOWER FLIGHT
+===================================================== */
+
+@keyframes flyAround {
+
+    0% {
+
+        transform:
+            translate(
+                var(--startX),
+                110vh
+            )
+            rotate(0deg)
+            scale(0.55);
+
+        opacity: 0;
+
+    }
+
+
+    10% {
+
+        opacity: 0.95;
+
+    }
+
+
+    30% {
+
+        transform:
+            translate(
+                var(--moveX1),
+                75vh
+            )
+            rotate(100deg)
+            scale(0.8);
+
+    }
+
+
+    55% {
+
+        transform:
+            translate(
+                var(--moveX2),
+                48vh
+            )
+            rotate(200deg)
+            scale(1);
+
+    }
+
+
+    75% {
+
+        transform:
+            translate(
+                var(--moveX3),
+                25vh
+            )
+            rotate(280deg)
+            scale(0.8);
+
+    }
+
+
+    100% {
+
+        transform:
+            translate(
+                var(--endX),
+                -15vh
+            )
+            rotate(400deg)
+            scale(0.5);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =====================================================
+   OPENING CONTENT
+===================================================== */
+
+.intro {
+
+    position: fixed;
+
+    z-index: 10;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+
+}
+
+
+/* little title */
+
+.intro-small {
+
+    color: white;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 12px;
+
+    text-shadow:
+        0 2px 12px rgba(50,20,50,0.5);
+
+}
+
+
+/* main title */
+
+.intro h1 {
+
+    color: white;
+
+    font-size:
+        clamp(
+            32px,
+            6vw,
+            65px
+        );
+
+    font-weight: normal;
+
+    line-height: 1.1;
+
+    text-shadow:
+        0 4px 20px
+        rgba(45,20,50,0.55);
+
+    margin-bottom: 12px;
+
+}
+
+
+.intro-text {
+
+    color: #fffaf8;
+
+    font-size: 18px;
+
+    max-width: 600px;
+
+    line-height: 1.6;
+
+    text-shadow:
+        0 2px 10px
+        rgba(40,20,50,0.55);
+
+    margin-bottom: 28px;
+
+}
+
+
+/* =====================================================
+   OPEN LETTER BUTTON
+===================================================== */
+
+.open-button {
+
+    border: none;
+
+    padding:
+        15px
+        30px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(
+            255,
+            250,
+            245,
+            0.94
+        );
+
+    color: #a65c71;
+
+    font-size: 17px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 35px
+        rgba(40,20,50,0.30);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.open-button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 40px
+        rgba(40,20,50,0.40);
+
+}
+
+
+/* =====================================================
+   THREE PICTURES
+===================================================== */
+
+.picture-row {
+
+    position: fixed;
+
+    z-index: 7;
+
+    bottom: 4%;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 92%;
+
+    max-width: 1200px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content:
+        space-between;
+
+    pointer-events: none;
+
+}
+
+
+/* all three images */
+
+.side-picture {
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 12px 20px
+            rgba(30,15,35,0.35)
+        );
+
+    transition:
+        transform .5s ease;
+
+}
+
+
+/* YOU CAN DO IT */
+
+.you-picture {
+
+    width:
+        clamp(
+            130px,
+            20vw,
+            260px
+        );
+
+    max-height: 330px;
+
+    animation:
+        gentleLeft
+        4s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* CAT IN THE MIDDLE */
+
+.cat-picture {
+
+    width:
+        clamp(
+            170px,
+            25vw,
+            310px
+        );
+
+    max-height: 340px;
+
+    animation:
+        gentleCat
+        4.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* TULIPS */
+
+.tulip-picture {
+
+    width:
+        clamp(
+            130px,
+            21vw,
+            270px
+        );
+
+    max-height: 350px;
+
+    animation:
+        gentleRight
+        4.2s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* =====================================================
+   PICTURE ANIMATIONS
+===================================================== */
+
+@keyframes gentleLeft {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(-3deg)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            rotate(2deg)
+            translateY(-8px);
+
+    }
+
+}
+
+
+@keyframes gentleCat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-1deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-12px)
+            rotate(1deg);
+
+    }
+
+}
+
+
+@keyframes gentleRight {
+
+    0%,
+    100% {
+
+        transform:
+            rotate(3deg)
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            rotate(-2deg)
+            translateY(-8px);
+
+    }
+
+}
+
+
+/* =====================================================
+   LETTER OVERLAY
+===================================================== */
+
+.letter-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 50;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(
+            35,
+            20,
+            45,
+            0.38
+        );
+
+    backdrop-filter:
+        blur(7px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .7s ease;
+
+}
+
+
+/* activated */
+
+.letter-screen.show {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+.letter {
+
+    width:
+        min(
+            650px,
+            92vw
+        );
+
+    max-height: 82vh;
+
+    overflow-y: auto;
+
+    padding: 38px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf5,
+            #fff0ed
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(25,10,35,0.45);
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .8
+        );
+
+    transform:
+        translateY(40px)
+        scale(.9);
+
+    transition:
+        transform .7s ease;
+
+}
+
+
+.letter-screen.show .letter {
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+
+.letter h2 {
+
+    text-align: center;
+
+    color: #a5536b;
+
+    font-size: 32px;
+
+    font-weight: normal;
+
+    margin-bottom: 8px;
+
+}
+
+
+.letter-subtitle {
+
+    text-align: center;
+
+    color: #9d7779;
+
+    font-style: italic;
+
+    margin-bottom: 25px;
+
+}
+
+
+.letter-content {
+
+    color: #5f4b50;
+
+    font-size: 16px;
+
+    line-height: 1.85;
+
+}
+
+
+.letter-content p {
+
+    margin-bottom: 17px;
+
+}
+
+
+/* =====================================================
+   YOUR LETTER PLACEHOLDER
+===================================================== */
+
+.your-message {
+
+    padding:
+        22px;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(
+            255,
+            226,
+            228,
+            0.55
+        );
+
+    border-left:
+        4px solid
+        #e89aae;
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-button {
+
+    display: block;
+
+    margin:
+        25px
+        auto
+        0;
+
+    border: none;
+
+    padding:
+        11px
+        23px;
+
+    border-radius: 30px;
+
+    background:
+        #d87991;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+.music-button {
+
+    display: block;
+
+    margin:
+        15px
+        auto
+        0;
+
+    border: none;
+
+    padding:
+        11px
+        22px;
+
+    border-radius: 30px;
+
+    background:
+        #a66ba8;
+
+    color: white;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+
+    .picture-row {
+
+        bottom: 2%;
+
+        width: 100%;
+
+        padding: 0 5px;
+
+    }
+
+
+    .you-picture {
+
+        width: 27vw;
+
+        max-height: 190px;
+
+    }
+
+
+    .cat-picture {
+
+        width: 38vw;
+
+        max-height: 230px;
+
+    }
+
+
+    .tulip-picture {
+
+        width: 28vw;
+
+        max-height: 210px;
+
+    }
+
+
+    .intro {
+
+        justify-content:
+            flex-start;
+
+        padding-top:
+            12vh;
+
+    }
+
+
+    .intro h1 {
+
+        font-size: 37px;
+
+    }
+
+
+    .intro-text {
+
+        font-size: 15px;
+
+        max-width: 90%;
+
+    }
+
+
+    .letter {
+
+        padding: 25px;
+
+    }
+
+
+    .letter h2 {
+
+        font-size: 27px;
+
+    }
+
+}
+
+
+/* =====================================================
+   EXTRA SMALL PHONES
+===================================================== */
+
+@media (max-width: 420px) {
+
+
+    .picture-row {
+
+        bottom: 1%;
+
+    }
+
+
+    .you-picture {
+
+        width: 29vw;
+
+    }
+
+
+    .cat-picture {
+
+        width: 39vw;
+
+    }
+
+
+    .tulip-picture {
+
+        width: 30vw;
+
+    }
+
+
+    .intro {
+
+        padding-top:
+            9vh;
+
+    }
+
+
+    .intro h1 {
+
+        font-size: 32px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     SUNSET
+=================================================== -->
+
+<div class="sky"></div>
+
+<div class="vignette"></div>
+
+
+<!-- ==================================================
+     FLOATING SPARKLES
+=================================================== -->
+
+<div class="sparkle"
+     style="left:12%; top:22%; animation-delay:1s;">
+     ✦
+</div>
+
+<div class="sparkle"
+     style="left:82%; top:18%; animation-delay:3s;">
+     ✧
+</div>
+
+<div class="sparkle"
+     style="left:20%; top:50%; animation-delay:2s;">
+     ✦
+</div>
+
+<div class="sparkle"
+     style="left:75%; top:48%; animation-delay:4s;">
+     ✧
+</div>
+
+
+<!-- ==================================================
+     FLYING FLOWERS
+=================================================== -->
+
+
+<div class="floating-flower pink"
+     style="
+     --startX:5vw;
+     --moveX1:20vw;
+     --moveX2:8vw;
+     --moveX3:30vw;
+     --endX:12vw;
+     --duration:13s;
+     --delay:0s;
+     --rotation:20deg;">
+     
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower yellow"
+     style="
+     --startX:22vw;
+     --moveX1:5vw;
+     --moveX2:35vw;
+     --moveX3:20vw;
+     --endX:40vw;
+     --duration:16s;
+     --delay:2s;
+     --rotation:10deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower blue"
+     style="
+     --startX:48vw;
+     --moveX1:70vw;
+     --moveX2:45vw;
+     --moveX3:75vw;
+     --endX:90vw;
+     --duration:14s;
+     --delay:4s;
+     --rotation:40deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower red"
+     style="
+     --startX:80vw;
+     --moveX1:60vw;
+     --moveX2:90vw;
+     --moveX3:65vw;
+     --endX:100vw;
+     --duration:12s;
+     --delay:1s;
+     --rotation:30deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower white"
+     style="
+     --startX:65vw;
+     --moveX1:40vw;
+     --moveX2:75vw;
+     --moveX3:50vw;
+     --endX:30vw;
+     --duration:17s;
+     --delay:6s;
+     --rotation:5deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower purple"
+     style="
+     --startX:35vw;
+     --moveX1:50vw;
+     --moveX2:25vw;
+     --moveX3:55vw;
+     --endX:15vw;
+     --duration:15s;
+     --delay:5s;
+     --rotation:50deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<!-- MORE FLOWERS -->
+
+<div class="floating-flower pink"
+     style="
+     --startX:90vw;
+     --moveX1:75vw;
+     --moveX2:50vw;
+     --moveX3:30vw;
+     --endX:5vw;
+     --duration:19s;
+     --delay:7s;
+     --rotation:15deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<div class="floating-flower yellow"
+     style="
+     --startX:15vw;
+     --moveX1:35vw;
+     --moveX2:55vw;
+     --moveX3:80vw;
+     --endX:95vw;
+     --duration:18s;
+     --delay:8s;
+     --rotation:60deg;">
+
+    <div class="flower-shape">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="flower-center"></span>
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     OPENING SCREEN
+=================================================== -->
+
+<div class="intro" id="intro">
+
+
+    <div class="intro-small">
+        just a little something for you ♡
+    </div>
+
+
+    <h1>
+        Dear Beboooo... 🌷
+    </h1>
+
+
+    <div class="intro-text">
+
+        I made this, idk why but yea
+        sorry ig lol its meaningless 😭😅
+
+        🌅
+
+    </div>
+
+
+    <button
+        class="open-button"
+        onclick="openLetter()">
+
+        ✉ Click to open LETTER
+
+    </button>
+
+
+</div>
+
+
+
+<!-- ==================================================
+     THREE MAIN PICTURES
+=================================================== -->
+
+<div class="picture-row">
+
+
+    <!-- LEFT -->
+
+    <img
+        src="youcandoit.png"
+        class="
+            side-picture
+            you-picture
+        "
+        alt="You can do it girl">
+
+
+    <!-- MIDDLE -->
+
+    <img
+        src="cat.png"
+        class="
+            side-picture
+            cat-picture
+        "
+        alt="Cute puppy-like cat">
+
+
+    <!-- RIGHT -->
+
+    <img
+        src="tulips.png"
+        class="
+            side-picture
+            tulip-picture
+        "
+        alt="Tulip bouquet">
+
+
+</div>
+
+
+
+<!-- ==================================================
+     LETTER POPUP
+=================================================== -->
+
+<div
+    class="letter-screen"
+    id="letterScreen">
+
+
+    <div class="letter">
+
+
+        <h2>
+            A little letter for you 🌷
+        </h2>
+
+
+        <div class="letter-subtitle">
+
+            SCROLL DOWN BEFORE READING
+            There's a song button click on that first
+            Then readdd plssss
+
+        </div>
+
+
+        <div class="letter-content">
+
+
+            <!-- ======================================
+                 REPLACE THE TEXT BELOW WITH YOUR
+                 OWN PERSONAL MESSAGE.
+
+                 KEEP THE <p> TAGS.
+            ======================================= -->
+
+
+            <div class="your-message">
+
+
+                <p>
+                     GOOD MORNING!!!! BEBOOOOOO
+                </p>
+
+
+                <p>
+                    Lol, yk since you will be reading the letter in the morning sooo hehe, anyways so the main reason
+                    of writing this letter is is idk eh I just thought I should do something cause you were so tired and 
+                    stressed and really went through a lot today so I thought I should do smth, andd idk I thought 
+                    making a website would be a good ideaaa. Idk eh sorry 
+                </p>
+                    So, aaj se gym start hogya and ik things will get really stressful and maybe somedays , especially 
+                    right now, the starting days, you will be feeling devastated and overwhelming with everything 
+                    going on rn, the major changes in lifestyle, change in daily routines and following a really really 
+                    strict schedule but hey , everything has a beginning to it, isn't it? I mean everyone goes to the
+                    gym sometime in their life, and go into dieting and having a lifestyle for better health, I will too
+                    I mean hum bola bhi tha gym join krne in 10 but everyone said 18 years ke baad, abhi padhai
+                    pe man lagao bas, gym jaane ka age bohut hai. And ugh I am gaining weight without any
+                   physical exercise ughh, I mean injury ke pehle phir bhi exercise hota tha and thakane wale
+                   kaam karta tha but rn I can't do those and idk till when so yea idk what I'll do lol.  
+
+                <p>
+                    Anyways so , as I was saying, its really good that you joined the gym and have started dieting
+                    right now, aage jaake help bohot karega, so yeeeeeee. But, ya rn initial stages pe bohut zyada
+                    difficult lagega and you may be distressed or really tensed certain days with everything 
+                   happening and obv there will be days of numerous cramps, tiredness, feeling like your body 
+                    giving up, straight up pain all over your body, god forbid any of these stuff happen but if
+                   at all they do, I just want to tell you that the situation and the pain will eventually be over,
+                    just you need to hold yourself together when days get most overwhelming.
+                </p>
+
+
+                <p>
+                    and yk, just take it one moment at a time. You don't have to be strong every second,
+                    and you don't have to pretend that everything is okay when it isn't. If you need to rest, rest. 
+                  If you need to cry, cry. If you need some time to yourself, take it. Altough ik you are always so
+                    busy and anxious about your work and how you HAVE TO complete it in the designated time
+                    which obv is important but please AND PLEASE think about your health first and not your work.
+                    Your health should and must be the top priority bebo, and nothing else, do you realize how tensed
+                    I was when I heard what happened today? ugh please please take care and don't let such a thing
+                    happen ever again, please, I dont really know kyu hua, mainly ig because of the sudden stress that
+                    you have took recently with the dieting and the gymming and the impact of all the things happening
+                    together maybe ugh idk but please don't be so stressed that such a terrible thing happens to you again
+                    like ever again.
+        
+                </p>
+
+
+                <p>
+                     There will be days when everything feels exhausting and you wonder when it'll finally get easier, 
+                   but please remember that those days don't last forever. The pain passes, the exhaustion passes, 
+                   and eventually you'll find yourself laughing about something silly again without even realizing 
+                   how far you've come. So whenever things feel like too much, don't think about getting through 
+                  everything at once. Just get through today. Then tomorrow. And then the day after that. 
+                   Although, ik how strong my bestfriend isss. So yea I dont think that will be much of a problem 
+                  for her eh? hehe , anyways yk I will be here for you always. Whenever you need any sort of help, 
+                   reassurance, are self-doubting, or just need someone by your side, I will always be here. So yeeee
+                    aaaahh ok kinda late lol sorry. but eh (not sorry nvm) idc I am doing what I want to, who are you
+                    to tell me huhhh? yeeee okkk byeeee good night tulippppp 
+                </p>
+
+
+
+                <p>
+                    ~~Buntyy🎀🎀
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- MUSIC -->
+
+        <button
+            class="music-button"
+            onclick="toggleMusic()">
+
+            🎵 Play a little music
+
+        </button>
+
+
+        <!--
+
+        PUT YOUR OWN PERMITTED AUDIO FILE
+        IN THIS FOLDER AS:
+
+        music.mp3.mpeg
+
+        -->
+
+        <audio id="music">
+
+            <source
+                src="music.mp3.mpeg"
+                type="audio/mpeg">
+
+        </audio>
+
+
+        <button
+            class="close-button"
+            onclick="closeLetter()">
+
+            Close ♡
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================================
+   OPEN LETTER
+=================================================== */
+
+function openLetter() {
+
+
+    const intro =
+        document.getElementById("intro");
+
+
+    const letter =
+        document.getElementById("letterScreen");
+
+
+    intro.style.opacity = "0";
+
+    intro.style.transform =
+        "translateY(-20px)";
+
+
+    setTimeout(function() {
+
+        letter.classList.add("show");
+
+    }, 500);
+
+
+}
+
+
+/* ==================================================
+   CLOSE LETTER
+=================================================== */
+
+function closeLetter() {
+
+    const letter =
+        document.getElementById("letterScreen");
+
+    letter.classList.remove("show");
+
+}
+
+
+/* ==================================================
+   MUSIC
+=================================================== */
+
+let musicPlaying = false;
+
+
+function toggleMusic() {
+
+
+    const music =
+        document.getElementById("music");
+
+
+    const button =
+        document.querySelector(".music-button");
+
+
+    if (!musicPlaying) {
+
+
+        music.play();
+
+
+        musicPlaying = true;
+
+
+        button.innerHTML =
+            "⏸ Pause the music";
+
+
+    } else {
+
+
+        music.pause();
+
+
+        musicPlaying = false;
+
+
+        button.innerHTML =
+            "🎵 Play a little music";
+
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
